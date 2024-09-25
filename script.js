@@ -29,7 +29,14 @@ const musicCollection = {
             artist: "Metallica",
             year: "1986"
         }
-    ]
+    ],
+    [Symbol.iterator] : function*(){
+        yield* this.albums;
+    }
+}
+
+for (const album of musicCollection) {
+    console.log(`${album.title} - ${album.artist}(${album.year})`)
 }
 
 
