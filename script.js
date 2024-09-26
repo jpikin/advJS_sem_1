@@ -74,58 +74,44 @@ dishesForOrders.set('Пицца', ['Пеперони', 'Маргарита']);
 dishesForOrders.set('Суши', ['Калифорния', 'Филадельфия']);
 dishesForOrders.set('Десерт', ['Тирамису', 'Чизкейк']);
 
-const CooksSpecialization = new Map();
-CooksSpecialization.set('Виктор', 'Пицца');
-CooksSpecialization.set('Ольга', 'Суши');
-CooksSpecialization.set('Дмитрий', 'Десерт');
-
-console.log(dishesForOrders);//УДАЛИТЬ
+const cookSpecializations = new Map();
+cookSpecializations.set('Виктор', 'Пицца');
+cookSpecializations.set('Ольга', 'Суши');
+cookSpecializations.set('Дмитрий', 'Десерт');
 
 queueOfClients.forEach(client => {
     let order = new Set();
-        order.add(getRandomDish()); 
-        order.add(getRandomDish()); 
+    order.add(getRandomDish()); 
+    order.add(getRandomDish()); 
     
     order = [...order];
-    console.log(order);
-    if (order.length === 2) {
-        ordersData[client] = order;
-        console.log(`Клиент ${client} сделал заказ ${order[0]} и ${order[1]}`);
-    } else {
-        ordersData[client] = [order[0], order[0]];
-        console.log(`Клиент ${client} сделал заказ ${order[0]} 2 шт`);
-    }
+        
+    ordersData[client] = order;
+    console.log(`Клиент ${client} сделал заказ ${order[0].join(' ')} и ${order[1].join(' ')}`);
+    
     takeOrder(order);
 });
 
-
-
-
-console.log(ordersData);
-
-
 /**
- * Возвращает рандомное блюдо из массива блюд dishesForOrders
+ * Возвращает массив с [рандомной специализацией и рандомным блюдом] из массива блюд dishesForOrders
  */
 function getRandomDish() {
     const entries = Array.from(dishesForOrders.entries());
     const randomArray = entries[Math.floor(Math.random() * entries.length)];
-    
     const randomSpecialization = randomArray[0];
     const randomDishCollection = randomArray[1];
     const randomDish = randomDishCollection[Math.floor(Math.random() * randomDishCollection.length)];
-    return randomDish;
-
     
+    return [randomSpecialization, randomDish];  
 }
 
 /**
  * Выводит в консоль информацию о том, какой повар готовит и какое блюдо.
  */
 function takeOrder(order) {
-    if(order.length === 1){
-
-    }
+    
+    
+    
 }
 
 
