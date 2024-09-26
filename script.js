@@ -69,20 +69,25 @@ const queueOfClients = ['Алексей', 'Мария', 'Ирина'];
 
 const ordersData = new Map();
 
-const dishesForOrders = ['Пицца Пепперони', 'Тирамису', 'Суши Калифорния', 'Пицца Маргарита', 'Чизкейк', 'Суши Филадельфия'];
+let dishesForOrders = new Map();
+dishesForOrders.set('Пицца', ['Пеперони', 'Маргарита']);
+dishesForOrders.set('Суши', ['Калифорния', 'Филадельфия']);
+dishesForOrders.set('Десерт', ['Тирамису', 'Чизкейк']);
 
 const CooksSpecialization = new Map();
-CooksSpecialization['Виктор'] = 'Пицца';
-CooksSpecialization['Ольга'] = 'Суши';
-CooksSpecialization['Дмитрий'] = 'Десерт';
+CooksSpecialization.set('Виктор', 'Пицца');
+CooksSpecialization.set('Ольга', 'Суши');
+CooksSpecialization.set('Дмитрий', 'Десерт');
+
+console.log(dishesForOrders);//УДАЛИТЬ
 
 queueOfClients.forEach(client => {
     let order = new Set();
         order.add(getRandomDish()); 
-        order.add(getRandomDish(dishesForOrders)); 
+        order.add(getRandomDish()); 
     
     order = [...order];
-    
+    console.log(order);
     if (order.length === 2) {
         ordersData[client] = order;
         console.log(`Клиент ${client} сделал заказ ${order[0]} и ${order[1]}`);
@@ -90,7 +95,7 @@ queueOfClients.forEach(client => {
         ordersData[client] = [order[0], order[0]];
         console.log(`Клиент ${client} сделал заказ ${order[0]} 2 шт`);
     }
-    
+    takeOrder(order);
 });
 
 
@@ -103,7 +108,24 @@ console.log(ordersData);
  * Возвращает рандомное блюдо из массива блюд dishesForOrders
  */
 function getRandomDish() {
-    return dishesForOrders[Math.floor(Math.random() * (dishesForOrders.length))];
+    const entries = Array.from(dishesForOrders.entries());
+    const randomArray = entries[Math.floor(Math.random() * entries.length)];
+    
+    const randomSpecialization = randomArray[0];
+    const randomDishCollection = randomArray[1];
+    const randomDish = randomDishCollection[Math.floor(Math.random() * randomDishCollection.length)];
+    return randomDish;
+
+    
+}
+
+/**
+ * Выводит в консоль информацию о том, какой повар готовит и какое блюдо.
+ */
+function takeOrder(order) {
+    if(order.length === 1){
+
+    }
 }
 
 
