@@ -1,33 +1,23 @@
 //Task 1
-// Используя Symbol.iterator, создайте объект "Музыкальная коллекция", который можно итерировать. Каждая итерация должна возвращать следующий альбом из коллекции.
 
-// • Создайте объект musicCollection, который содержит массив альбомов и имеет свойство-символ Symbol.iterator. Каждый альбом имеет следующую структуру:
-
-// {
-// title: "Название альбома",
-// artist: "Исполнитель",
-// year: "Год выпуска"
-// }
-
-// • Реализуйте кастомный итератор для объекта musicCollection. Итератор должен перебирать альбомы по порядку.
-// • Используйте цикл for...of для перебора альбомов в музыкальной коллекции и вывода их на консоль в формате: Название альбома - Исполнитель (Год выпуска)
+console.log('Task 1');
 
 const musicCollection = {
     albums : [
         {
-            title: "The wall",
-            artist: "Pink Floyd",
-            year: "1979"
+            title: 'The wall',
+            artist: 'Pink Floyd',
+            year: '1979'
         },
         {
-            title: "Nevermind",
-            artist: "Nirvana",
-            year: "1991"
+            title: 'Nevermind',
+            artist: 'Nirvana',
+            year: '1991'
         },
         {
-            title: "Master of Puppets",
-            artist: "Metallica",
-            year: "1986"
+            title: 'Master of Puppets',
+            artist: 'Metallica',
+            year: '1986'
         }
     ],
     [Symbol.iterator] : function*(){
@@ -38,13 +28,6 @@ const musicCollection = {
 for (const album of musicCollection) {
     console.log(`${album.title} - ${album.artist}(${album.year})`)
 }
-
-
-
-
-
-
-
 
 
 //Task 2
@@ -78,6 +61,46 @@ for (const album of musicCollection) {
 // Клиент Мария заказала: Суши "Калифорния" и Пиццу "Маргарита".
 // Клиент Ирина заказала: Чизкейк.
 
+
+console.log('Task 2');
+
+
+const queueOfClients = ['Алексей', 'Мария', 'Ирина'];
+
+const ordersData = new Map();
+
+const dishesForOrders = ['Пицца Пепперони', 'Тирамису', 'Суши Калифорния', 'Пицца Маргарита', 'Чизкейк', 'Суши Филадельфия'];
+
+const CooksSpecialization = new Map();
+CooksSpecialization['Виктор'] = 'Пицца';
+CooksSpecialization['Ольга'] = 'Суши';
+CooksSpecialization['Дмитрий'] = 'Десерт';
+
+queueOfClients.forEach(client => {
+    let order = new Set();
+        order.add(getRandomDish()); 
+        order.add(getRandomDish(dishesForOrders)); 
+    
+    order = [...order];
+    
+    if (order.length === 2) {
+        ordersData[client] = order;
+        console.log(`Клиент ${client} сделал заказ ${order[0]} и ${order[1]}`);
+    } else {
+        ordersData[client] = [order[0], order[0]];
+        console.log(`Клиент ${client} сделал заказ ${order[0]} 2 шт`);
+    }
+    
+});
+
+
+
+
+console.log(ordersData);
+
+function getRandomDish() {
+    return dishesForOrders[Math.floor(Math.random() * (dishesForOrders.length))];
+}
 
 
 
