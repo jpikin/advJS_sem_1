@@ -98,6 +98,10 @@ queueOfClients.forEach(client => {
 
 console.log(ordersData);
 
+
+/**
+ * Возвращает рандомное блюдо из массива блюд dishesForOrders
+ */
 function getRandomDish() {
     return dishesForOrders[Math.floor(Math.random() * (dishesForOrders.length))];
 }
