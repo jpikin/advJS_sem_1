@@ -75,9 +75,9 @@ dishesForOrders.set('Суши', ['Калифорния', 'Филадельфия
 dishesForOrders.set('Десерт', ['Тирамису', 'Чизкейк']);
 
 const cookSpecializations = new Map();
-cookSpecializations.set('Виктор', 'Пицца');
-cookSpecializations.set('Ольга', 'Суши');
-cookSpecializations.set('Дмитрий', 'Десерт');
+cookSpecializations.set('Пицца','Виктор');
+cookSpecializations.set('Суши','Ольга' );
+cookSpecializations.set('Десерт','Дмитрий');
 
 queueOfClients.forEach(client => {
     let order = new Set();
@@ -87,7 +87,11 @@ queueOfClients.forEach(client => {
     order = [...order];
         
     ordersData[client] = order;
-    console.log(`Клиент ${client} сделал заказ ${order[0].join(' ')} и ${order[1].join(' ')}`);
+    if (order[0][1] === order[1][1]) {
+        console.log(`Клиент ${client} сделал заказ ${order[0].join(' ')} 2 шт.`)
+    } else {
+        console.log(`Клиент ${client} сделал заказ ${order[0].join(' ')} и ${order[1].join(' ')}`);
+    }
     
     takeOrder(order);
 });
@@ -109,6 +113,11 @@ function getRandomDish() {
  * Выводит в консоль информацию о том, какой повар готовит и какое блюдо.
  */
 function takeOrder(order) {
+    if (order[0][1] === order[1][1]) {
+        console.log(`Повар ${cookSpecializations.get(order[0][0])} начал готовить ${order[0][1]} 2 шт.`);
+    } else {
+        order.forEach(el => console.log(`Повар ${cookSpecializations.get(el[0])} начал готовить ${el[1]}`));
+    }
     
     
     
